@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
+    //extend niezbędne by móc skonfigurować ruch do contollera inny niż GET
 
     @Bean
     public JdbcUserDetailsManager userDetailsService(){
@@ -42,9 +43,11 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic();
 
         http.csrf().disable();
+        //niebędne do użycia POST w controller
 
         http.authorizeRequests()
                 .mvcMatchers("/user").permitAll()
                 .anyRequest().authenticated();
+        //niezbędne do przepuszczenia ruchu na /user bez autentykacji
     }
 }
